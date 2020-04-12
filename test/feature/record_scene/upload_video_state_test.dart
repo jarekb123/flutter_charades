@@ -49,8 +49,6 @@ void main() {
     });
   });
 
-  StreamMatcher emitsAny<T>() => emits(isInstanceOf<T>());
-
   group('UploadVideoBloc', () {
     MockVideoRepository mockVideoRepository;
     UploadVideoBloc uploadVideoBloc;

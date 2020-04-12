@@ -60,10 +60,6 @@ class UploadVideoEvent {
   UploadVideoEvent(this.videoFilePath);
 }
 
-class _UploadFinished extends UploadVideoEvent {
-  _UploadFinished(String videoFilePath) : super(videoFilePath);
-}
-
 class UploadVideoBloc extends Bloc<UploadVideoEvent, UploadVideoState> {
   final VideoRepository _videoRepository;
 
@@ -75,19 +71,18 @@ class UploadVideoBloc extends Bloc<UploadVideoEvent, UploadVideoState> {
 
   @override
   Stream<UploadVideoState> mapEventToState(UploadVideoEvent event) async* {
-    if (event is _UploadFinished) {
-      yield state.copyWith.call(isFinished: true);
-    } else {
-      yield* _videoRepository
-          .uploadVideo(event.videoFilePath)
-          .map((progress) => UploadVideoState(
-                progress: progress.floor(),
-                isFinished: false,
-                hasError: false,
-              ))
-          .doOnDone(() => add(_UploadFinished(event.videoFilePath)))
-          .onErrorResume(
-              (error) => Stream.value(state.copyWith.call(hasError: true)));
-    }
+    yield* _videoRepository
+        .uploadVideo(event.videoFilePath)
+        .map((progress) => UploadVideoState(
+              progress: progress.floor(),
+              isFinished: false,
+              hasError: false,
+            ))
+        .concatWith([_onFinished()]).onErrorResume(
+            (error) => Stream.value(state.copyWith.call(hasError: true)));
+  }
+
+  Stream<UploadVideoState> _onFinished() async* {
+    yield state.copyWith.call(isFinished: true);
   }
 }
