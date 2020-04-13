@@ -1,6 +1,8 @@
-# kalambury
+# flutter_charades
 
-A new Flutter project.
+## Flutter
+
+If you want to learn about Flutter. Check flutter.dev
 
 ## Learnings
 
