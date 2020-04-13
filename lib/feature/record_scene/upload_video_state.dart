@@ -6,6 +6,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kalambury/repositories/video_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
+import 'package:kalambury/utils/rx_utils.dart';
+
 part 'upload_video_state.freezed.dart';
 
 class UploadVideoTask extends ChangeNotifier {
@@ -78,11 +80,15 @@ class UploadVideoBloc extends Bloc<UploadVideoEvent, UploadVideoState> {
               isFinished: false,
               hasError: false,
             ))
-        .concatWith([_onFinished()]).onErrorResume(
-            (error) => Stream.value(state.copyWith.call(hasError: true)));
+        .onDoneResume(() => _onFinished())
+        .onErrorResume((_) => _onError());
   }
 
   Stream<UploadVideoState> _onFinished() async* {
     yield state.copyWith.call(isFinished: true);
+  }
+
+  Stream<UploadVideoState> _onError() async* {
+    yield state.copyWith.call(hasError: true);
   }
 }
