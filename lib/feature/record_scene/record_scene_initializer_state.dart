@@ -62,6 +62,8 @@ class RecordSceneInitBloc
     RecordSceneInitEvent event,
   ) async* {
     if (!_initialized) {
+      _initialized = true;
+      
       yield* Stream.periodic(
         Duration(seconds: 1),
         (elapsedSeconds) => initialState.remainingSeconds - elapsedSeconds,

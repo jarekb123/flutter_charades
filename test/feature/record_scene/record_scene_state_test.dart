@@ -25,15 +25,29 @@ main() {
   });
 
   group('RecordSceneInitBloc', () {
+    var initEventExpectedStates = [
+      ...[5, 4, 3, 2, 1].map((seconds) => RecordSceneInitState(
+          remainingSeconds: seconds, shouldStartRecording: false)),
+      RecordSceneInitState(remainingSeconds: 0, shouldStartRecording: true),
+    ];
     blocTest(
       'init event',
       build: () async => RecordSceneInitBloc(),
-      expect: [
-        ...[5, 4, 3, 2, 1].map((seconds) => RecordSceneInitState(
-            remainingSeconds: seconds, shouldStartRecording: false)),
-        RecordSceneInitState(remainingSeconds: 0, shouldStartRecording: true),
-      ],
+      expect: initEventExpectedStates,
       act: (bloc) => bloc.add(RecordSceneInitEvent()),
+      skip: 0,
+    );
+
+    blocTest(
+      'ignores multiple init events',
+      build: () async => RecordSceneInitBloc(),
+      expect: initEventExpectedStates,
+      act: (bloc) async {
+        bloc.add(RecordSceneInitEvent());
+        bloc.add(RecordSceneInitEvent());
+        bloc.add(RecordSceneInitEvent());
+        bloc.add(RecordSceneInitEvent());
+      },
       skip: 0,
     );
   });
