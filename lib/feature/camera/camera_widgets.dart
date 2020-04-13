@@ -22,6 +22,10 @@ class CameraView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (cameraController == null) {
+      return loadingBuilder(context);
+    }
+
     return _MobileCamerasProvider(
       child: Consumer<List<CameraDescription>>(
         builder: (context, cameras, _) {
