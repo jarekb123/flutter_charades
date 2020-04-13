@@ -2,15 +2,10 @@
 
 A new Flutter project.
 
-## Getting Started
+## Learnings
 
-This project is a starting point for a Flutter application.
+### ChangeNotifier vs BLOC library
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. BLOC library needs more code :(
+2. ChangeNotifier is harder to test when some streams are listened in it. I like that I can use yield/yield* operator in Bloc's mapEventToStream method. For me this syntax is more understandable.
+3. Testing BLOCs is easy. Unfortunately blocTest (from bloc_test package) sometimes fails when using private internal events. But RxDart comes with beautiful operators that helps to refactor code, that using private operators won't be necessary.
