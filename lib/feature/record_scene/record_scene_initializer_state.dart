@@ -1,6 +1,11 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:kalambury/utils/rx_utils.dart';
+
+part 'record_scene_initializer_state.freezed.dart';
 
 class RecordSceneInitializer extends ChangeNotifier {
   static const _secondsToStart = 5;
@@ -30,5 +35,44 @@ class RecordSceneInitializer extends ChangeNotifier {
         notifyListeners();
       }).listen(_remainingSeconds.add),
     );
+  }
+}
+
+// BLOC version
+@freezed
+abstract class RecordSceneInitState with _$RecordSceneInitState {
+  const factory RecordSceneInitState({
+    @required int remainingSeconds,
+    @required bool shouldStartRecording,
+  }) = _RecordSceneInitState;
+}
+
+class RecordSceneInitEvent {}
+
+class RecordSceneInitBloc
+    extends Bloc<RecordSceneInitEvent, RecordSceneInitState> {
+  @override
+  RecordSceneInitState get initialState =>
+      RecordSceneInitState(remainingSeconds: 5, shouldStartRecording: false);
+
+  bool _initialized = false;
+
+  @override
+  Stream<RecordSceneInitState> mapEventToState(
+    RecordSceneInitEvent event,
+  ) async* {
+    if (!_initialized) {
+      yield* Stream.periodic(
+        Duration(seconds: 1),
+        (elapsedSeconds) => initialState.remainingSeconds - elapsedSeconds,
+      )
+          .take(initialState.remainingSeconds)
+          .map((remainingSeconds) => RecordSceneInitState(
+              remainingSeconds: remainingSeconds, shouldStartRecording: false))
+          .onDoneResume(
+            () => Stream.value(RecordSceneInitState(
+                remainingSeconds: 0, shouldStartRecording: true)),
+          );
+    }
   }
 }
