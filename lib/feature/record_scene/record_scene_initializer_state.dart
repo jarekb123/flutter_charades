@@ -39,42 +39,71 @@ class RecordSceneInitializer extends ChangeNotifier {
 }
 
 // BLOC version
+abstract class RecordSceneState {}
+
 @freezed
-abstract class RecordSceneInitState with _$RecordSceneInitState {
-  const factory RecordSceneInitState({
+abstract class PreRecordState
+    with _$PreRecordState
+    implements RecordSceneState {
+  const factory PreRecordState({
     @required int remainingSeconds,
-    @required bool shouldStartRecording,
-  }) = _RecordSceneInitState;
+  }) = _PreRecordState;
 }
 
-class RecordSceneInitEvent {}
+@freezed
+abstract class ShouldStartRecordingState
+    with _$ShouldStartRecordingState
+    implements RecordSceneState {
+  const factory ShouldStartRecordingState() = _ShouldStartRecordingState;
+}
 
-class RecordSceneInitBloc
-    extends Bloc<RecordSceneInitEvent, RecordSceneInitState> {
-  @override
-  RecordSceneInitState get initialState =>
-      RecordSceneInitState(remainingSeconds: 5, shouldStartRecording: false);
+@freezed
+abstract class ShouldStopRecordingState
+    with _$ShouldStopRecordingState
+    implements RecordSceneState {
+  const factory ShouldStopRecordingState() = _ShouldStopRecordingState;
+}
+
+abstract class RecordSceneEvent {}
+
+class InitRecordSceneEvent implements RecordSceneEvent {}
+
+class OnStartRecordingSceneEvent implements RecordSceneEvent {}
+
+class RecordSceneBloc extends Bloc<RecordSceneEvent, RecordSceneState> {
+  static const _initRemainingSeconds = 5;
+  static const _videoDuration = Duration(seconds: 30);
 
   bool _initialized = false;
 
   @override
-  Stream<RecordSceneInitState> mapEventToState(
-    RecordSceneInitEvent event,
-  ) async* {
-    if (!_initialized) {
-      _initialized = true;
+  RecordSceneState get initialState =>
+      PreRecordState(remainingSeconds: _initRemainingSeconds);
 
-      yield* Stream.periodic(
-        Duration(seconds: 1),
-        (elapsedSeconds) => initialState.remainingSeconds - elapsedSeconds - 1,
-      )
-          .takeWhile((seconds) => seconds > 0)
-          .map((remainingSeconds) => RecordSceneInitState(
-              remainingSeconds: remainingSeconds, shouldStartRecording: false))
-          .onDoneResume(
-            () => Stream.value(RecordSceneInitState(
-                remainingSeconds: 0, shouldStartRecording: true)),
-          );
+  @override
+  Stream<RecordSceneState> mapEventToState(
+    RecordSceneEvent event,
+  ) async* {
+    if (event is InitRecordSceneEvent) {
+      if (!_initialized) {
+        _initialized = true;
+
+        yield* Stream.periodic(
+          Duration(seconds: 1),
+          (elapsedSeconds) => _initRemainingSeconds - elapsedSeconds - 1,
+        )
+            .takeWhile((seconds) => seconds >= 0)
+            .map<RecordSceneState>((remainingSeconds) =>
+                PreRecordState(remainingSeconds: remainingSeconds))
+            .onDoneResume(
+              () => Stream.value(ShouldStartRecordingState()),
+            );
+      }
+    } else if (event is OnStartRecordingSceneEvent) {
+      yield await Future.delayed(
+        _videoDuration,
+        () => ShouldStopRecordingState(),
+      );
     }
   }
 }

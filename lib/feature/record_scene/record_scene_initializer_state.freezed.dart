@@ -9,154 +9,280 @@ part of 'record_scene_initializer_state.dart';
 
 T _$identity<T>(T value) => value;
 
-class _$RecordSceneInitStateTearOff {
-  const _$RecordSceneInitStateTearOff();
+class _$PreRecordStateTearOff {
+  const _$PreRecordStateTearOff();
 
-  _RecordSceneInitState call(
-      {@required int remainingSeconds, @required bool shouldStartRecording}) {
-    return _RecordSceneInitState(
+  _PreRecordState call({@required int remainingSeconds}) {
+    return _PreRecordState(
       remainingSeconds: remainingSeconds,
-      shouldStartRecording: shouldStartRecording,
     );
   }
 }
 
 // ignore: unused_element
-const $RecordSceneInitState = _$RecordSceneInitStateTearOff();
+const $PreRecordState = _$PreRecordStateTearOff();
 
-mixin _$RecordSceneInitState {
+mixin _$PreRecordState {
   int get remainingSeconds;
-  bool get shouldStartRecording;
 
-  $RecordSceneInitStateCopyWith<RecordSceneInitState> get copyWith;
+  $PreRecordStateCopyWith<PreRecordState> get copyWith;
 }
 
-abstract class $RecordSceneInitStateCopyWith<$Res> {
-  factory $RecordSceneInitStateCopyWith(RecordSceneInitState value,
-          $Res Function(RecordSceneInitState) then) =
-      _$RecordSceneInitStateCopyWithImpl<$Res>;
-  $Res call({int remainingSeconds, bool shouldStartRecording});
+abstract class $PreRecordStateCopyWith<$Res> {
+  factory $PreRecordStateCopyWith(
+          PreRecordState value, $Res Function(PreRecordState) then) =
+      _$PreRecordStateCopyWithImpl<$Res>;
+  $Res call({int remainingSeconds});
 }
 
-class _$RecordSceneInitStateCopyWithImpl<$Res>
-    implements $RecordSceneInitStateCopyWith<$Res> {
-  _$RecordSceneInitStateCopyWithImpl(this._value, this._then);
+class _$PreRecordStateCopyWithImpl<$Res>
+    implements $PreRecordStateCopyWith<$Res> {
+  _$PreRecordStateCopyWithImpl(this._value, this._then);
 
-  final RecordSceneInitState _value;
+  final PreRecordState _value;
   // ignore: unused_field
-  final $Res Function(RecordSceneInitState) _then;
+  final $Res Function(PreRecordState) _then;
 
   @override
   $Res call({
     Object remainingSeconds = freezed,
-    Object shouldStartRecording = freezed,
   }) {
     return _then(_value.copyWith(
       remainingSeconds: remainingSeconds == freezed
           ? _value.remainingSeconds
           : remainingSeconds as int,
-      shouldStartRecording: shouldStartRecording == freezed
-          ? _value.shouldStartRecording
-          : shouldStartRecording as bool,
     ));
   }
 }
 
-abstract class _$RecordSceneInitStateCopyWith<$Res>
-    implements $RecordSceneInitStateCopyWith<$Res> {
-  factory _$RecordSceneInitStateCopyWith(_RecordSceneInitState value,
-          $Res Function(_RecordSceneInitState) then) =
-      __$RecordSceneInitStateCopyWithImpl<$Res>;
+abstract class _$PreRecordStateCopyWith<$Res>
+    implements $PreRecordStateCopyWith<$Res> {
+  factory _$PreRecordStateCopyWith(
+          _PreRecordState value, $Res Function(_PreRecordState) then) =
+      __$PreRecordStateCopyWithImpl<$Res>;
   @override
-  $Res call({int remainingSeconds, bool shouldStartRecording});
+  $Res call({int remainingSeconds});
 }
 
-class __$RecordSceneInitStateCopyWithImpl<$Res>
-    extends _$RecordSceneInitStateCopyWithImpl<$Res>
-    implements _$RecordSceneInitStateCopyWith<$Res> {
-  __$RecordSceneInitStateCopyWithImpl(
-      _RecordSceneInitState _value, $Res Function(_RecordSceneInitState) _then)
-      : super(_value, (v) => _then(v as _RecordSceneInitState));
+class __$PreRecordStateCopyWithImpl<$Res>
+    extends _$PreRecordStateCopyWithImpl<$Res>
+    implements _$PreRecordStateCopyWith<$Res> {
+  __$PreRecordStateCopyWithImpl(
+      _PreRecordState _value, $Res Function(_PreRecordState) _then)
+      : super(_value, (v) => _then(v as _PreRecordState));
 
   @override
-  _RecordSceneInitState get _value => super._value as _RecordSceneInitState;
+  _PreRecordState get _value => super._value as _PreRecordState;
 
   @override
   $Res call({
     Object remainingSeconds = freezed,
-    Object shouldStartRecording = freezed,
   }) {
-    return _then(_RecordSceneInitState(
+    return _then(_PreRecordState(
       remainingSeconds: remainingSeconds == freezed
           ? _value.remainingSeconds
           : remainingSeconds as int,
-      shouldStartRecording: shouldStartRecording == freezed
-          ? _value.shouldStartRecording
-          : shouldStartRecording as bool,
     ));
   }
 }
 
-class _$_RecordSceneInitState
+class _$_PreRecordState
     with DiagnosticableTreeMixin
-    implements _RecordSceneInitState {
-  const _$_RecordSceneInitState(
-      {@required this.remainingSeconds, @required this.shouldStartRecording})
-      : assert(remainingSeconds != null),
-        assert(shouldStartRecording != null);
+    implements _PreRecordState {
+  const _$_PreRecordState({@required this.remainingSeconds})
+      : assert(remainingSeconds != null);
 
   @override
   final int remainingSeconds;
-  @override
-  final bool shouldStartRecording;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RecordSceneInitState(remainingSeconds: $remainingSeconds, shouldStartRecording: $shouldStartRecording)';
+    return 'PreRecordState(remainingSeconds: $remainingSeconds)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'RecordSceneInitState'))
-      ..add(DiagnosticsProperty('remainingSeconds', remainingSeconds))
-      ..add(DiagnosticsProperty('shouldStartRecording', shouldStartRecording));
+      ..add(DiagnosticsProperty('type', 'PreRecordState'))
+      ..add(DiagnosticsProperty('remainingSeconds', remainingSeconds));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _RecordSceneInitState &&
+        (other is _PreRecordState &&
             (identical(other.remainingSeconds, remainingSeconds) ||
                 const DeepCollectionEquality()
-                    .equals(other.remainingSeconds, remainingSeconds)) &&
-            (identical(other.shouldStartRecording, shouldStartRecording) ||
-                const DeepCollectionEquality()
-                    .equals(other.shouldStartRecording, shouldStartRecording)));
+                    .equals(other.remainingSeconds, remainingSeconds)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(remainingSeconds) ^
-      const DeepCollectionEquality().hash(shouldStartRecording);
+      const DeepCollectionEquality().hash(remainingSeconds);
 
   @override
-  _$RecordSceneInitStateCopyWith<_RecordSceneInitState> get copyWith =>
-      __$RecordSceneInitStateCopyWithImpl<_RecordSceneInitState>(
-          this, _$identity);
+  _$PreRecordStateCopyWith<_PreRecordState> get copyWith =>
+      __$PreRecordStateCopyWithImpl<_PreRecordState>(this, _$identity);
 }
 
-abstract class _RecordSceneInitState implements RecordSceneInitState {
-  const factory _RecordSceneInitState(
-      {@required int remainingSeconds,
-      @required bool shouldStartRecording}) = _$_RecordSceneInitState;
+abstract class _PreRecordState implements PreRecordState {
+  const factory _PreRecordState({@required int remainingSeconds}) =
+      _$_PreRecordState;
 
   @override
   int get remainingSeconds;
   @override
-  bool get shouldStartRecording;
+  _$PreRecordStateCopyWith<_PreRecordState> get copyWith;
+}
+
+class _$ShouldStartRecordingStateTearOff {
+  const _$ShouldStartRecordingStateTearOff();
+
+  _ShouldStartRecordingState call() {
+    return const _ShouldStartRecordingState();
+  }
+}
+
+// ignore: unused_element
+const $ShouldStartRecordingState = _$ShouldStartRecordingStateTearOff();
+
+mixin _$ShouldStartRecordingState {}
+
+abstract class $ShouldStartRecordingStateCopyWith<$Res> {
+  factory $ShouldStartRecordingStateCopyWith(ShouldStartRecordingState value,
+          $Res Function(ShouldStartRecordingState) then) =
+      _$ShouldStartRecordingStateCopyWithImpl<$Res>;
+}
+
+class _$ShouldStartRecordingStateCopyWithImpl<$Res>
+    implements $ShouldStartRecordingStateCopyWith<$Res> {
+  _$ShouldStartRecordingStateCopyWithImpl(this._value, this._then);
+
+  final ShouldStartRecordingState _value;
+  // ignore: unused_field
+  final $Res Function(ShouldStartRecordingState) _then;
+}
+
+abstract class _$ShouldStartRecordingStateCopyWith<$Res> {
+  factory _$ShouldStartRecordingStateCopyWith(_ShouldStartRecordingState value,
+          $Res Function(_ShouldStartRecordingState) then) =
+      __$ShouldStartRecordingStateCopyWithImpl<$Res>;
+}
+
+class __$ShouldStartRecordingStateCopyWithImpl<$Res>
+    extends _$ShouldStartRecordingStateCopyWithImpl<$Res>
+    implements _$ShouldStartRecordingStateCopyWith<$Res> {
+  __$ShouldStartRecordingStateCopyWithImpl(_ShouldStartRecordingState _value,
+      $Res Function(_ShouldStartRecordingState) _then)
+      : super(_value, (v) => _then(v as _ShouldStartRecordingState));
+
   @override
-  _$RecordSceneInitStateCopyWith<_RecordSceneInitState> get copyWith;
+  _ShouldStartRecordingState get _value =>
+      super._value as _ShouldStartRecordingState;
+}
+
+class _$_ShouldStartRecordingState
+    with DiagnosticableTreeMixin
+    implements _ShouldStartRecordingState {
+  const _$_ShouldStartRecordingState();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ShouldStartRecordingState()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'ShouldStartRecordingState'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _ShouldStartRecordingState);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+}
+
+abstract class _ShouldStartRecordingState implements ShouldStartRecordingState {
+  const factory _ShouldStartRecordingState() = _$_ShouldStartRecordingState;
+}
+
+class _$ShouldStopRecordingStateTearOff {
+  const _$ShouldStopRecordingStateTearOff();
+
+  _ShouldStopRecordingState call() {
+    return const _ShouldStopRecordingState();
+  }
+}
+
+// ignore: unused_element
+const $ShouldStopRecordingState = _$ShouldStopRecordingStateTearOff();
+
+mixin _$ShouldStopRecordingState {}
+
+abstract class $ShouldStopRecordingStateCopyWith<$Res> {
+  factory $ShouldStopRecordingStateCopyWith(ShouldStopRecordingState value,
+          $Res Function(ShouldStopRecordingState) then) =
+      _$ShouldStopRecordingStateCopyWithImpl<$Res>;
+}
+
+class _$ShouldStopRecordingStateCopyWithImpl<$Res>
+    implements $ShouldStopRecordingStateCopyWith<$Res> {
+  _$ShouldStopRecordingStateCopyWithImpl(this._value, this._then);
+
+  final ShouldStopRecordingState _value;
+  // ignore: unused_field
+  final $Res Function(ShouldStopRecordingState) _then;
+}
+
+abstract class _$ShouldStopRecordingStateCopyWith<$Res> {
+  factory _$ShouldStopRecordingStateCopyWith(_ShouldStopRecordingState value,
+          $Res Function(_ShouldStopRecordingState) then) =
+      __$ShouldStopRecordingStateCopyWithImpl<$Res>;
+}
+
+class __$ShouldStopRecordingStateCopyWithImpl<$Res>
+    extends _$ShouldStopRecordingStateCopyWithImpl<$Res>
+    implements _$ShouldStopRecordingStateCopyWith<$Res> {
+  __$ShouldStopRecordingStateCopyWithImpl(_ShouldStopRecordingState _value,
+      $Res Function(_ShouldStopRecordingState) _then)
+      : super(_value, (v) => _then(v as _ShouldStopRecordingState));
+
+  @override
+  _ShouldStopRecordingState get _value =>
+      super._value as _ShouldStopRecordingState;
+}
+
+class _$_ShouldStopRecordingState
+    with DiagnosticableTreeMixin
+    implements _ShouldStopRecordingState {
+  const _$_ShouldStopRecordingState();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ShouldStopRecordingState()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'ShouldStopRecordingState'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _ShouldStopRecordingState);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+}
+
+abstract class _ShouldStopRecordingState implements ShouldStopRecordingState {
+  const factory _ShouldStopRecordingState() = _$_ShouldStopRecordingState;
 }
