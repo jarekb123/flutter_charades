@@ -63,12 +63,12 @@ class RecordSceneInitBloc
   ) async* {
     if (!_initialized) {
       _initialized = true;
-      
+
       yield* Stream.periodic(
         Duration(seconds: 1),
-        (elapsedSeconds) => initialState.remainingSeconds - elapsedSeconds,
+        (elapsedSeconds) => initialState.remainingSeconds - elapsedSeconds - 1,
       )
-          .take(initialState.remainingSeconds)
+          .takeWhile((seconds) => seconds > 0)
           .map((remainingSeconds) => RecordSceneInitState(
               remainingSeconds: remainingSeconds, shouldStartRecording: false))
           .onDoneResume(
