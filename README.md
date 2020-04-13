@@ -2,7 +2,7 @@
 
 ## Flutter
 
-If you want to learn about Flutter. Check [flutter.dev](flutter.dev)
+If you want to learn about Flutter. Check [flutter.dev](https://flutter.dev)
 
 ## Learnings
 
